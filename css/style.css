@@ -9,23 +9,45 @@
 
 body {
   background-color: var(--primary-light);
-  color: var(primary-dark);
+  color: var(--primary-dark);
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .header {
-  color: inherit;
-  font-size: 50px;
+  color: var(--primary-dark);
+  font-size: 60px;
   font-weight: bold;
   text-align: center;
   padding: 20px 0px 20px 0px;
 }
 
-.main {
+.main{
   display: flex;
+  flex-direction: row;
   justify-content: center;
+}
+
+.user-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.user-options button {
+  color: inherit;
+  font-weight: 550;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-dark);
+}
+
+.user-options .toggled{
+  background-color: var(--primary-dark);
+  color: var(--primary-light);
 }
 
 #sketch-container {
@@ -39,7 +61,7 @@ body {
 }
 
 .tile {
-  background-color: red;
-  border: 1px dotted black;
+  background-color: var(--secondary-light);
+  /* border: 1px dotted black; */
 }
 
