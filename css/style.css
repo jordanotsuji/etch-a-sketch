@@ -43,11 +43,16 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid var(--primary-dark);
+  transition:ease-in-out 40ms;
 }
 
 .user-options .toggled{
   background-color: var(--primary-dark);
   color: var(--primary-light);
+}
+
+.user-options button:hover {
+  transform: scale(1.1);
 }
 
 #sketch-container {
