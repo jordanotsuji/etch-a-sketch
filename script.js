@@ -1,9 +1,10 @@
 let gridSize = 16;
 let mouseDown = false;
 const sketchContainer = document.getElementById('sketch-container');
+const clearButton = document.querySelector('.clear-button')
 
 function initGrid() {
-  // create 16x16 grid 
+  sketchContainer.innerHTML = ""
   sketchContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${gridSize}fr)`
   for (let i = 0; i < gridSize * gridSize; i++) {
     const div = document.createElement('div');
@@ -23,11 +24,18 @@ function colorTile(e) {
 }
 
 function clearGrid() {
+  // resets background color of each tile in sketch zone,
+  // not sure if this is more efficient than recalling initGrid
   const tiles = document.querySelectorAll('.tile');
   tiles.forEach(tile => tile.style.backgroundColor = "")
 }
 
+function initEventListeners() {
+  document.body.onmousedown = () => mouseDown = true;
+  document.body.onmouseup = () => mouseDown = false;
+  clearButton.addEventListener('click', clearGrid)
+}
+
 initGrid()
-document.body.onmousedown = () => mouseDown = true;
-document.body.onmouseup = () => mouseDown = false;
+initEventListeners()
 
