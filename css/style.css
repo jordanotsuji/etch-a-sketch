@@ -29,8 +29,17 @@ body {
 }
 
 #sketch-container {
+  /* Because of grid, no need to set a width or height for each tile */
+  display: grid;
   width: 500px;
   height: 500px;
   background-color: var(--secondary-light);
+  /* TODO: customize box shadow */
+  box-shadow: 1px 1px;
+}
+
+.tile {
+  background-color:red;
+  border: 1px dotted black;
 }
 
