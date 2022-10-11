@@ -7,6 +7,8 @@ const colorButtons = document.querySelectorAll('.toggleable');
 const clearButton = document.getElementById('clear-button');
 const rainbowButton = document.getElementById('rainbow');
 const eraserButton = document.getElementById('eraser');
+const sizeText = document.querySelector('.size-value');
+const sizeScaleBar = document.getElementById('size-slider');
 
 function initGrid() {
   sketchContainer.innerHTML = ""    // clear current divs in sketch zone
@@ -54,9 +56,20 @@ function drawModeHandler(e) {
 
 function toggleButton(target) {
   colorButtons.forEach(button => button.classList.remove('toggled'))
-  console.log(target)
   if (target != null) {
     target.classList.add('toggled')
+  }
+}
+
+function sizeInputHandler(e) {
+  gridSize = e.target.value;
+  if (e.type === "input") {
+    // if just sliding the bar, adjust size text but dont 
+    // re-init sketch area yet
+    sizeText.textContent = "" + gridSize + "x" + gridSize;
+  } else if (e.type === "change") {
+    // re-init sketch area when user lets go of the slider
+    initGrid();
   }
 }
 
@@ -66,6 +79,8 @@ function initEventListeners() {
   clearButton.addEventListener('click', clearGrid);
   eraserButton.addEventListener('click', drawModeHandler);
   rainbowButton.addEventListener('click', drawModeHandler);
+  sizeScaleBar.addEventListener('input', sizeInputHandler);
+  sizeScaleBar.addEventListener('change', sizeInputHandler);
 }
 
 initGrid();
