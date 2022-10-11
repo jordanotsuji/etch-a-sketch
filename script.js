@@ -5,11 +5,11 @@ let drawMode = "default";   // drawMode = button id of current drawing mode
 const sketchContainer = document.getElementById('sketch-container');
 const colorButtons = document.querySelectorAll('.toggleable');
 const clearButton = document.getElementById('clear-button');
-const rainbowButton = document.getElementById('rainbow-button');
-const eraserButton = document.getElementById('eraser-button');
+const rainbowButton = document.getElementById('rainbow');
+const eraserButton = document.getElementById('eraser');
 
 function initGrid() {
-  sketchContainer.innerHTML = ""
+  sketchContainer.innerHTML = ""    // clear current divs in sketch zone
   sketchContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${gridSize}fr)`
   for (let i = 0; i < gridSize * gridSize; i++) {
     const div = document.createElement('div');
@@ -24,7 +24,14 @@ function initGrid() {
 function colorTile(e) {
   // only color tiles if hovering over a tile and holding click
   if (e.type === "mouseover" && !mouseDown) return;
-  e.target.style.backgroundColor = "black";
+  if (drawMode === "default") {
+    e.target.style.backgroundColor = "black";
+  } else if (drawMode == "eraser") {
+    e.target.style.backgroundColor = "";
+  } else if (drawMode == "rainbow") {
+    let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    e.target.style.backgroundColor = "#" + randomColor;
+  }
 }
 
 function clearGrid() {
@@ -34,7 +41,7 @@ function clearGrid() {
   tiles.forEach(tile => tile.style.backgroundColor = "");
 }
 
-function eraserButtonHandler(e) {
+function drawModeHandler(e) {
   if (drawMode !== e.target.id) {
     drawMode = e.target.id;
     toggleButton(e.target);
@@ -56,8 +63,8 @@ function initEventListeners() {
   document.body.onmousedown = () => mouseDown = true;
   document.body.onmouseup = () => mouseDown = false;
   clearButton.addEventListener('click', clearGrid);
-  eraserButton.addEventListener('click', eraserButtonHandler);
-  rainbowButton.addEventListener('click', eraserButtonHandler);
+  eraserButton.addEventListener('click', drawModeHandler);
+  rainbowButton.addEventListener('click', drawModeHandler);
 }
 
 initGrid();
