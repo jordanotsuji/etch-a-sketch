@@ -76,7 +76,6 @@ main{
 }
 
 .size-adjust .size-value {
-
   font-size: 18px;
 }
 
@@ -114,6 +113,7 @@ main{
 
 .tile {
   background-color: var(--secondary-light);
+  user-select: none;
 }
 
 .footer {
