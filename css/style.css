@@ -4,8 +4,11 @@
 
 :root {
   /* https://coolors.co/2c302e-cc5a71-ccc7b9 */
-  --primary-dark: #2C302E;
-  --primary-light: #F1F0EB;
+  /* --primary-dark: #2C302E; */
+  --primary-dark: #2E3138;
+  --primary-light: #EAEAEA;
+  /* --primary-light: #2E3138; */
+  /* --primary-light: #F1F0EB; */
     /* #F0F7F4; */
   --secondary-light: #fefefe;
   --shadow: #999999;
@@ -47,12 +50,13 @@ body {
 .user-options button {
   color: inherit;
   background-color: inherit;
-  font-weight: 550;
-  font-size: 20px;
+  font-weight: 530;
+  font-size: 16px;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid var(--primary-dark);
   transition: ease-in-out 40ms;
+  cursor: pointer;
 }
 
 .user-options .toggled{
@@ -62,6 +66,39 @@ body {
 
 .user-options button:hover {
   transform: scale(1.1);
+}
+
+.size-adjust {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.size-adjust .size-value {
+
+  font-size: 18px;
+}
+
+#size-slider {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background-color: var(--secondary-light);
+  border: 1px solid var(--primary-dark);
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+#size-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background-color: var(--primary-dark);
+  cursor: pointer;
+  border-radius: 20px;
 }
 
 #sketch-container {
