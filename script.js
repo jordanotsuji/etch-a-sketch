@@ -29,6 +29,7 @@ function colorTile(e) {
   } else if (drawMode == "eraser") {
     e.target.style.backgroundColor = "";
   } else if (drawMode == "rainbow") {
+    // https://css-tricks.com/snippets/javascript/random-hex-color/
     let randomColor = Math.floor(Math.random() * 16777215).toString(16);
     e.target.style.backgroundColor = "#" + randomColor;
   }
