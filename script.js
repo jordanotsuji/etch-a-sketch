@@ -15,8 +15,10 @@ const sizeText = document.querySelector('.size-value');
 const sizeScaleBar = document.getElementById('size-slider');
 
 function initEventListeners() {
-  document.body.onmousedown = () => mouseDown = true;
-  document.body.onmouseup = () => mouseDown = false;
+  // document.body.onmousedown = () => mouseDown = true;
+  // document.body.onmouseup = () => mouseDown = false;
+  sketchContainer.onmousedown = () => mouseDown = true;
+  sketchContainer.onmouseup = () => mouseDown = false;
   drawColorPicker.addEventListener('input', drawColorChangeHandler);
   backgroundColorPicker.addEventListener('input', backgroundColorChangeHandler);
   clearButton.addEventListener('click', clearGrid);
