@@ -13,10 +13,12 @@ const rainbowButton = document.getElementById('rainbow');
 const eraserButton = document.getElementById('eraser');
 const sizeText = document.querySelector('.size-value');
 const sizeScaleBar = document.getElementById('size-slider');
+const sizeAdjustArea = document.querySelector('.size-adjust');
 
 function initEventListeners() {
-  sketchContainer.onmousedown = () => mouseDown = true;
-  sketchContainer.onmouseup = () => mouseDown = false;
+  // document.onmouseup = () => mouseDown = false; ended up causing glitch on safari
+  document.onmouseup = mouseUpHandler;
+  document.onmousedown = mouseDownHandler;
   drawColorPicker.addEventListener('input', drawColorChangeHandler);
   backgroundColorPicker.addEventListener('input', backgroundColorChangeHandler);
   clearButton.addEventListener('click', clearGrid);
@@ -24,6 +26,14 @@ function initEventListeners() {
   rainbowButton.addEventListener('click', drawModeHandler);
   sizeScaleBar.addEventListener('input', sizeInputHandler);
   sizeScaleBar.addEventListener('change', sizeInputHandler);
+}
+
+function mouseDownHandler() {
+  mouseDown = true;
+}
+
+function mouseUpHandler() {
+  mouseDown = false;
 }
 
 function initVariables() {
