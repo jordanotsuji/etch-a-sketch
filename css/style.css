@@ -49,8 +49,23 @@ main{
   padding: 10px;
 }
 
-#color-picker {
+.color-picker-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 105%; 
+}
+
+.color-picker {
+  border: none;
   width: 100%; 
+  height: 40px;
+  border-radius: 50px;
+  transition: transform 0.1s ease-in-out;
+}
+
+.color-picker:hover {
+  transform: scale(1.05);
 }
 
 .user-options button {
@@ -73,7 +88,7 @@ main{
 }
 
 .user-options button:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .size-adjust {

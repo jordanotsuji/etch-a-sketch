@@ -16,7 +16,10 @@
   <main>
     <div class="user-options">
       <!-- div that contains user options -->
-      <input type="color" name="Color" id="color-picker" value="black"></input>
+      <div class="color-picker-container">
+        <input type="color" class="color-picker" name="Brush" id="draw-color-picker" value="black"></input>
+        <input type="color" class="color-picker" name="Background" id="background-color-picker" value="#ffffff"></input>
+      </div>
       <button class="toggleable" id="eraser">Eraser</button>
       <button class="toggleable" id="rainbow">Rainbow</button>
       <button id="clear-button">Clear Canvas</button>
