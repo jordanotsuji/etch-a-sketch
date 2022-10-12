@@ -43,6 +43,7 @@ main{
 
 button, input {
   cursor: pointer;
+  user-select: none;
 }
 
 .color-picker-container {
@@ -124,7 +125,6 @@ button, input {
   width: 500px;
   height: 500px;
   background-color: var(--secondary-light);
-  /* TODO: customize box shadow */
   box-shadow: 0 0 8px var(--shadow);
   margin-left: 30px;
   user-select: none;
