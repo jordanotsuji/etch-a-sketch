@@ -17,7 +17,7 @@ const sizeScaleBar = document.getElementById('size-slider');
 function initEventListeners() {
   document.body.onmousedown = () => mouseDown = true;
   document.body.onmouseup = () => mouseDown = false;
-  drawColorPicker.addEventListener('change', drawColorChangeHandler);
+  drawColorPicker.addEventListener('input', drawColorChangeHandler);
   clearButton.addEventListener('click', clearGrid);
   eraserButton.addEventListener('click', drawModeHandler);
   rainbowButton.addEventListener('click', drawModeHandler);
