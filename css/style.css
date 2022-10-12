@@ -115,7 +115,6 @@ button, input {
   width: 25px;
   height: 25px;
   background-color: var(--primary-dark);
-  cursor: pointer;
   border-radius: 20px;
 }
 
