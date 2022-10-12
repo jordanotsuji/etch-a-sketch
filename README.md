@@ -1,6 +1,6 @@
 # etch-a-sketch
 
-Etch-a-Sketch game created using HTML, CSS, & JavaScript
+Etch-a-Sketch game created using HTML, CSS, & JavaScript: [Live Preview](https://jordanotsuji.github.io/etch-a-sketch/)
 
 Planned Extra Features:
 - Multiple user adjustable options
