@@ -18,6 +18,7 @@ function initEventListeners() {
   document.body.onmousedown = () => mouseDown = true;
   document.body.onmouseup = () => mouseDown = false;
   drawColorPicker.addEventListener('input', drawColorChangeHandler);
+  backgroundColorPicker.addEventListener('input', backgroundColorChangeHandler);
   clearButton.addEventListener('click', clearGrid);
   eraserButton.addEventListener('click', drawModeHandler);
   rainbowButton.addEventListener('click', drawModeHandler);
@@ -39,9 +40,11 @@ function initGrid() {
   for (let i = 0; i < gridSize * gridSize; i++) {
     const div = document.createElement('div');
     div.classList.add('tile');
-    // mousedown alone will 
+    // mousedown for clicks without moving into a tile
+    // mouseover for holding down while moving into tiles
     div.addEventListener('mouseover', colorTile);
     div.addEventListener('mousedown', colorTile);
+    div.style.backgroundColor = backgroundColor;
     sketchContainer.appendChild(div);
   }
 }
@@ -52,11 +55,16 @@ function colorTile(e) {
   if (drawMode === "default") {
     e.target.style.backgroundColor = drawColor;
   } else if (drawMode == "eraser") {
-    e.target.style.backgroundColor = "";
+    e.target.style.backgroundColor = backgroundColor;
+    e.target.classList.remove('drawn');
   } else if (drawMode == "rainbow") {
     // https://css-tricks.com/snippets/javascript/random-hex-color/
     let randomColor = Math.floor(Math.random() * 16777215).toString(16);
     e.target.style.backgroundColor = "#" + randomColor;
+  }
+  if (drawMode != "eraser") {
+    // add drawn class so changing backgroundColor doesn't impact it
+    e.target.classList.add('drawn');
   }
 }
 
@@ -64,7 +72,11 @@ function clearGrid() {
   // resets background color of each tile in sketch zone,
   // not sure if this is more efficient than recalling initGrid
   const tiles = document.querySelectorAll('.tile');
-  tiles.forEach(tile => tile.style.backgroundColor = "");
+  tiles.forEach(tile => {
+    tile.style.backgroundColor = backgroundColor;
+    // remove drawn class from tiles so background color change doesn't ignore them
+    tile.classList.remove('drawn');
+  });
 }
 
 function drawModeHandler(e) {
@@ -79,6 +91,18 @@ function drawModeHandler(e) {
 
 function drawColorChangeHandler(e) {
   drawColor = e.target.value;
+}
+
+function backgroundColorChangeHandler(e) {
+  // change background color for clear canvas
+  backgroundColor = e.target.value;
+  const tiles = document.querySelectorAll('.tile');
+  // Only change background of tiles that aren't drawn on
+  tiles.forEach(tile => {
+    if (!tile.classList.contains('drawn')) {
+      tile.style.backgroundColor = backgroundColor;
+    }
+  })
 }
 
 function toggleButton(target) {
@@ -100,8 +124,7 @@ function sizeInputHandler(e) {
   }
 }
 
-
+// initialize variables and event listeners
 initGrid();
 initEventListeners();
 initVariables();
-
