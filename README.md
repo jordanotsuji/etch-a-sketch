@@ -11,4 +11,4 @@ Planned Extra Features:
   - adjustable grid sizing
 
 Notes:
-- Ran into an error on safari where the mouse would get stuck selecting the size slider and not be able to let go. Error was caused by a body.document.onmousedown event listener interfering with the event listener for the slider. Fixed by moving event listener to sketch body.
+- Ran into an error on safari where the mouse would get stuck selecting the size slider and not be able to let go. Error was caused by a document.body.onmousedown event listener which directly changed mouseDown rather than calling a funciton. After changing to function, the slider was functional on safari
