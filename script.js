@@ -1,14 +1,37 @@
 let gridSize = 16;
 let mouseDown = false;
-let drawMode = "default";   // drawMode = button id of current drawing mode
+let drawMode = "";   // drawMode = button id of current drawing mode
+let backgroundColor = "";
+let drawColor = "";
 
 const sketchContainer = document.getElementById('sketch-container');
+const drawColorPicker = document.getElementById('draw-color-picker');
+const backgroundColorPicker = document.getElementById('background-color-picker');
 const colorButtons = document.querySelectorAll('.toggleable');
 const clearButton = document.getElementById('clear-button');
 const rainbowButton = document.getElementById('rainbow');
 const eraserButton = document.getElementById('eraser');
 const sizeText = document.querySelector('.size-value');
 const sizeScaleBar = document.getElementById('size-slider');
+
+function initEventListeners() {
+  document.body.onmousedown = () => mouseDown = true;
+  document.body.onmouseup = () => mouseDown = false;
+  drawColorPicker.addEventListener('change', drawColorChangeHandler);
+  clearButton.addEventListener('click', clearGrid);
+  eraserButton.addEventListener('click', drawModeHandler);
+  rainbowButton.addEventListener('click', drawModeHandler);
+  sizeScaleBar.addEventListener('input', sizeInputHandler);
+  sizeScaleBar.addEventListener('change', sizeInputHandler);
+}
+
+function initVariables() {
+  gridSize = 16;
+  mouseDown = false;
+  drawMode = "default";
+  backgroundColor = "#fefefe";
+  drawColor = "#2E3138";
+}
 
 function initGrid() {
   sketchContainer.innerHTML = ""    // clear current divs in sketch zone
@@ -27,7 +50,7 @@ function colorTile(e) {
   // only color tiles if hovering over a tile and holding click
   if (e.type === "mouseover" && !mouseDown) return;
   if (drawMode === "default") {
-    e.target.style.backgroundColor = "black";
+    e.target.style.backgroundColor = drawColor;
   } else if (drawMode == "eraser") {
     e.target.style.backgroundColor = "";
   } else if (drawMode == "rainbow") {
@@ -54,6 +77,10 @@ function drawModeHandler(e) {
   }
 }
 
+function drawColorChangeHandler(e) {
+  drawColor = e.target.value;
+}
+
 function toggleButton(target) {
   colorButtons.forEach(button => button.classList.remove('toggled'))
   if (target != null) {
@@ -73,16 +100,8 @@ function sizeInputHandler(e) {
   }
 }
 
-function initEventListeners() {
-  document.body.onmousedown = () => mouseDown = true;
-  document.body.onmouseup = () => mouseDown = false;
-  clearButton.addEventListener('click', clearGrid);
-  eraserButton.addEventListener('click', drawModeHandler);
-  rainbowButton.addEventListener('click', drawModeHandler);
-  sizeScaleBar.addEventListener('input', sizeInputHandler);
-  sizeScaleBar.addEventListener('change', sizeInputHandler);
-}
 
 initGrid();
 initEventListeners();
+initVariables();
 
